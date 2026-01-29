@@ -1,6 +1,6 @@
 # Affiliate System Plugin 🚀
 
-This is a standalone extraction of the CopyMindset AI Affiliate System, designed to be integrated into any Flask/React project.
+This is a standalone extraction of the <a href='https://copymindset.com>CopyMindset AI </a> Affiliate System, designed to be integrated into any Flask/React project.
 
 ## Project Structure
 
@@ -38,6 +38,19 @@ affiliate-plugin/
 
 ### 3. Database
 - Run `database/schema.sql` against your PostgreSQL database to create the necessary tables.
+
+## Environment Variables
+
+### Backend (.env)
+Required for email delivery and link generation:
+- `RESEND_API_KEY`: Your Resend API key.
+- `MAIL_DEFAULT_SENDER`: The email address to send invites from (must be verified in Resend).
+- `DOMAIN`: The base URL of your application (e.g., `http://localhost:3000` or `https://your-app.com`).
+- `SQLALCHEMY_DATABASE_URI`: Your PostgreSQL connection string.
+- `SECRET_KEY`: A secure random string for Flask sessions.
+
+### Frontend (.env)
+- `VITE_API_URL`: (Optional) The URL of your backend API if running on a different port/domain.
 
 ## Features Included
 - **Referral Link Tracking**: Automated unique code generation and visit logging.
