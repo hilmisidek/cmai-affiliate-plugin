@@ -1,4 +1,5 @@
-import { AuthResponse, AuditResult, ApiError } from '../types';
+import { AuthResponse, AuditResult } from './types';
+
 
 // Use /api prefix for production (Vercel rewrites), fallback to localhost for dev
 const BASE_URL = import.meta.env.PROD ? '/api' : (import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000');

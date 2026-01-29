@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { User } from '../types';
+import { User } from './types';
 import {
     Link,
     Mail,
@@ -15,7 +15,7 @@ import {
     AlertCircle,
     Loader2
 } from 'lucide-react';
-import { api } from '../services/api';
+import { api } from './api_service_reference';
 
 interface Props {
     user: User;
@@ -122,7 +122,7 @@ export const AffiliateDashboard: React.FC<Props> = ({ user }) => {
             created_at: new Date().toISOString(),
             isPending: true
         };
-        setEmails(prev => [optimisticEntry, ...prev]);
+        setEmails((prev: EmailEntry[]) => [optimisticEntry, ...prev]);
 
         try {
             const result = await api.addAffiliateEmail(emailToAdd);
@@ -133,11 +133,11 @@ export const AffiliateDashboard: React.FC<Props> = ({ user }) => {
             } else {
                 setEmailError(result.results?.[0]?.message || 'Failed to add email');
                 // Remove optimistic entry on failure
-                setEmails(prev => prev.filter(e => e.email !== emailToAdd));
+                setEmails((prev: EmailEntry[]) => prev.filter((e: EmailEntry) => e.email !== emailToAdd));
             }
         } catch (err: any) {
             setEmailError(err.message || 'Failed to add email');
-            setEmails(prev => prev.filter(e => e.email !== emailToAdd));
+            setEmails((prev: EmailEntry[]) => prev.filter((e: EmailEntry) => e.email !== emailToAdd));
         } finally {
             setAddingEmail(false);
             setIsSyncing(false);
@@ -153,18 +153,18 @@ export const AffiliateDashboard: React.FC<Props> = ({ user }) => {
         setIsSyncing(true);
 
         // Mark as deleting optimistically
-        setEmails(prev => prev.map(e =>
+        setEmails((prev: EmailEntry[]) => prev.map((e: EmailEntry) =>
             e.email === targetEmail ? { ...e, isDeleting: true } : e
         ));
 
         try {
             await api.removeAffiliateEmail(targetEmail);
             // Real removal
-            setEmails(prev => prev.filter(e => e.email !== targetEmail));
+            setEmails((prev: EmailEntry[]) => prev.filter((e: EmailEntry) => e.email !== targetEmail));
         } catch (err: any) {
             console.error('Failed to remove email:', err);
             // Revert isDeleting state on error
-            setEmails(prev => prev.map(e =>
+            setEmails((prev: EmailEntry[]) => prev.map((e: EmailEntry) =>
                 e.email === targetEmail ? { ...e, isDeleting: false } : e
             ));
         } finally {
@@ -221,7 +221,7 @@ export const AffiliateDashboard: React.FC<Props> = ({ user }) => {
                 </div>
                 <div>
                     <h2 className="text-2xl font-bold text-white">Affiliate Program</h2>
-                    <p className="text-slate-400 text-sm">Invite friends and earn rewards</p>
+                    <p className="text-slate-400 text-sm">Welcome, {user.name}! Invite friends and earn rewards</p>
                 </div>
             </div>
 
@@ -333,6 +333,7 @@ export const AffiliateDashboard: React.FC<Props> = ({ user }) => {
                         ) : (
                             emails.map((entry, idx) => (
                                 <div
+                                    key={entry.email}
                                     className={`flex items-center justify-between bg-dark-input/50 rounded-lg px-3 py-2 transition-opacity ${entry.isPending || entry.isDeleting ? 'opacity-60' : ''}`}
                                     data-testid={`affiliate-email-item-${idx}`}
                                 >

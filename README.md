@@ -2,6 +2,9 @@
 
 This is a standalone extraction of the <a href='https://copymindset.com>CopyMindset AI </a> Affiliate System, designed to be integrated into any Flask/React project.
 
+## AI prompt
+Use AI_INTEGRATION_GUIDE.md to prompt your agent
+
 ## Project Structure
 
 ```text
@@ -31,7 +34,13 @@ affiliate-plugin/
 - Ensure your `User` model matches the expectations (specifically the `id`, `email`, `name`, `credits`, and `tier` columns).
 
 ### 2. Frontend Integration (React)
-- Copy `AffiliateDashboard.tsx` to your components folder.
+- Copy the `frontend/` folder into your project.
+- Install the required dependencies:
+  ```bash
+  cd frontend
+  npm install
+  ```
+- Copy `AffiliateDashboard.tsx` to your components folder if you only want the component.
 - Ensure you have `lucide-react` and `Tailwind CSS` installed.
 - Update the `api` imports in the component to match your project's service layer.
 - Use `api_service_reference.ts` to implement the necessary fetch calls.
@@ -61,3 +70,12 @@ Required for email delivery and link generation:
 ## Dependencies
 - Backend: `Flask`, `Flask-SQLAlchemy`, `resend` (for emails).
 - Frontend: `React`, `Lucide-React`, `Tailwind CSS`.
+
+## Contribution
+Please contribute to the project by opening an issue or a pull request.
+Never tested the standalone version of this plugin. Feel free to test it and let me know if you have any issues.
+
+## Buy me a coffee
+<a href="https://buymeacoffee.com/copymindset" target="_blank" rel="noopener noreferrer">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="width:150px; height:40px;" border="0" />
+</a>
