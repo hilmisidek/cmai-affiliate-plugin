@@ -1,6 +1,6 @@
 # Affiliate System Plugin 🚀
 
-This is a standalone extraction of the <a href='https://copymindset.com>CopyMindset AI </a> Affiliate System, designed to be integrated into any Flask/React project.
+This is a standalone extraction of the https://copymindset.com Affiliate System, designed to be integrated into any Flask/React project.
 
 ## Project Structure
 
